@@ -1,2 +1,1 @@
-# Platinum
-Data Personal
+# Challenge-Platinum-BEJ
