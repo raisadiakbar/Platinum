@@ -10,10 +10,10 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       customer_id: {
-        type: Sequelize.STRING
+        type: Sequelize.UUID
       },
       item_id: {
-        type: Sequelize.STRING
+        type: Sequelize.UUID
       },
       qty: {
         type: Sequelize.INTEGER

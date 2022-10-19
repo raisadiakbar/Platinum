@@ -1,4 +1,5 @@
 'use strict';
+const UUID = require('uuid').v4;
 const {
   Model
 } = require('sequelize');
@@ -14,8 +15,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   order.init({
-    customer_id: DataTypes.STRING,
-    item_id: DataTypes.STRING,
+    customer_id: DataTypes.UUID,
+    item_id: DataTypes.UUID,
     qty: DataTypes.INTEGER
   }, {
     sequelize,

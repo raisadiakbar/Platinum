@@ -1,4 +1,5 @@
 'use strict';
+const UUID = require('uuid').v4;
 const {
   Model
 } = require('sequelize');

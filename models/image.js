@@ -1,4 +1,5 @@
 'use strict';
+const UUID = require('uuid').v4;
 const {
   Model
 } = require('sequelize');
@@ -15,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   image.init({
     url: DataTypes.STRING,
-    item_id: DataTypes.STRING
+    item_id: DataTypes.UUID
   }, {
     sequelize,
     modelName: 'image',

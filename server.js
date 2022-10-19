@@ -10,9 +10,10 @@ const morgan = require('./middlewares/morgan');
 const swaggerUi = require('swagger-ui-express');
 const doc = require('./doc');
 
-const AdminRouter = require('./routes/admin.routes');
+const AdminRouter = require('./routes/admins.routes');
 const ItemRouter = require('./routes/items.routes');
-const SellerRouter = require('./routes/seller.routes');
+const SellerRouter = require('./routes/sellers.routes');
+const OrderRouter = require('./routes/order.routes')
 const errorHandler = require('./middlewares/errHandler');
 const chatHandler = require('./socket/chat');
 
@@ -60,9 +61,11 @@ app.post('/forgot-password', async (req, res, next) => {
   }
 })
 
-app.use('/admin', AdminRouter);
-app.use('/seller', SellerRouter);
+app.use('/admins', AdminRouter);
+app.use('/sellers', SellerRouter);
 app.use('/items', ItemRouter);
+app.use('/orders', OrderRouter);
+
 
 //  error handler middlerware
 app.use(errorHandler);

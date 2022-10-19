@@ -15,23 +15,26 @@ jobs:
       - run: npm install
       - run: npm run test
         env:
-          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+          JWT_SECRET_KEY: ${{ secrets.JWT_SECRET_KEY }}
           CLOUDINARY_NAME: ${{ secrets.CLOUDINARY_NAME }}
           CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
-          CLOUDINARY_SECRET: ${{ secrets.CLOUDINARY_SECRET }}
-          DB_NAME_DEV: ${{ secrets.DB_NAME_DEV }}
-          DB_USER_DEV: ${{ secrets.DB_USER_DEV }}
-          DB_PASS_DEV: ${{ secrets.DB_PASS_DEV }}
-          DB_HOST_DEV: ${{ secrets.DB_HOST_DEV }}
-          DB_PORT_DEV: ${{ secrets.DB_PORT_DEV }}
-          DB_DIALECT_DEV: ${{ secrets.DB_DIALECT_DEV }}
+          CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_SECRET }}
+          DATABASE_SECRET: ${{ secrets.DATABASE_SECRET }}
+          USERNAME_SECRET: ${{ secrets.USERNAME_SECRET }}
+          PASSWORD_SECRET: ${{ secrets.PASSWORD_SECRET }}
+          HOST_SECRET: ${{ secrets.HOST_SECRET }}
+          PORT_SECRET: ${{ secrets.PORT_SECRET }}
+          DIALECT_SECRET: ${{ secrets.DIALECT_SECRET }}
           HOST: ${{ secrets.HOST }}
           PORT: ${{ secrets.PORT }}
           PGSSLMODE: ${{ secrets.PGSSLMODE }}
-          MAIL_HOST: ${{ secrets.MAIL_HOST }}
-          MAIL_PORT: ${{ secrets.MAIL_PORT }}
-          MAIL_EMAIL: ${{ secrets.MAIL_EMAIL }}
-          MAIL_PASS: ${{ secrets.MAIL_PASS }}
+          EMAIL: ${{ secrets.EMAIL }}
+          PASSWORD: ${{ secrets.PASSWORD }}
+          LOGIN_EMAIL: ${{ secrets.LOGIN_EMAIL }}
+          LOGIN_PASSWORD: ${{ secrets.LOGIN_PASSWORD }}
+          CUSTOMER_ID: ${{ secrets.CUSTOMER_ID }}
+          ITEM_ID: ${{ secrets.ITEM_ID }}
+          ORDER_ID: ${{ secrets.ORDER_ID }}
   deploy:
     runs-on: ubuntu-latest
     needs: testing
@@ -41,5 +44,5 @@ jobs:
         with:
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
           heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
-          heroku_email: ${{ secrets.EMAIL }}
+          heroku_email: ${{ secrets.HEROKU_EMAIL }}
           branch: main

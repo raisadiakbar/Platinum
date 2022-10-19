@@ -1,23 +1,24 @@
 {
   "development": {
     "username": "postgres",
-    "password": "Password",
-    "database": "my-Platinum",
-    "host": "127.0.0.1",
+    "password": "passsword",
+    "database": "bingles",
+    "host": "localhost",
     "dialect": "postgres"
   },
   "test": {
-    "username": "root",
-    "password": null,
-    "database": "database_test",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "username": "postgres",
+    "password": "passsword",
+    "database": "bingles",
+    "host": "localhost",
+    "dialect": "postgres"
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "username": "tmqxusiemyguvj",
+    "password": "b91122865697d971ce33113959125a2d0f40d8dfeb3f214df52eb805a03e7e9a",
+    "database": "dc65n2lhva12v2",
+    "host": "ec2-50-19-255-190.compute-1.amazonaws.com",
+    "port": "5432",
+    "dialect": "postgres"
   }
 }

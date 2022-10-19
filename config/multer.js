@@ -2,11 +2,7 @@ const multer = require('multer');
 
 const fileFilter = (req, file, next) => {
   if (!file) next('File cannot be empty');
-  else if (
-    file.mimetype !== 'image/png' &&
-    file.mimetype !== 'image/jpg' &&
-    file.mimetype !== 'image/jpeg'
-  ) next({
+  else if (file.mimetype !== 'image/png') next({
     message: 'Unsupport file format',
     support: 'png'
   });
@@ -16,7 +12,7 @@ const fileFilter = (req, file, next) => {
 
 const storage = multer.diskStorage({
   //  folder tempat menyimpan hasil generated file
-  destination: (_, __, next) => next(null, './files'),
+  destination: (_, __,next) => next(null, './files'),
 
   //  nama file
   filename: function (req, file, next) {
@@ -33,7 +29,7 @@ const storage = multer.diskStorage({
       const MM = current.getMonth() + 1 > 9 ? current.getMonth() + 1 : `0${current.getMonth() + 1}`;
       const YY = current.getFullYear();
   
-      const filename = `${req.user.id} - ${YY}${MM}${DD}${hh}${mm}${ss}${ms}.${fileFormat}`;
+      const filename = `${YY}${MM}${DD}${hh}${mm}${ss}${ms}.${fileFormat}`;
       req.filePath = filename;
 
       next(null, filename);
@@ -47,7 +43,6 @@ module.exports = multer({
   storage,
   fileFilter,
   limits: {
-    fileSize: 500_000,
-    fieldNameSize: 1_000_000
-  }
+    fileSize: 500_000
+    }
 });
