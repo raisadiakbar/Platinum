@@ -9,7 +9,7 @@ const routerItems = require('./src/route/Items');
 const routerCustomers = require('./src/route/Customers');
 const routerAdmin = require('./src/route/Admins');
 const routerSellers = require('./src/route/Sellers');
-const errorHandler = require('./middleware/errHandler');
+const errorHandler = require('./middleware/errHandlers');
 
 const app = Express();
 const server = createServer(app);
@@ -29,7 +29,7 @@ const onConnection = (socket) => {
 io.on("connection", onConnection);
 
 const swaggerUi = require('swagger-ui-express');
-const swaggerDocument = require('./docs');
+const swaggerDocument = require('./doc');
 const passport = require('./helpers/passport');
 const session = require('express-session');
 const bodyParser = require('body-parser');
