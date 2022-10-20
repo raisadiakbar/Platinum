@@ -1,11 +1,15 @@
 const jwt = require('jsonwebtoken');
-const secretKey = process.env.JWT_SECRET;
+const secretKey = `${process.env.JWT_SECRET_KEY}`;
 
-const encode = (data) => jwt.sign(data, secretKey, { expiresIn: 60 * 60 });
+const encode = (data) => {
+    return jwt.sign(data, secretKey, { expiresIn: 60 * 60 });
+}
 
-const decode = (token) => jwt.verify(token, secretKey);
+const decode = (token) => {
+    return jwt.verify(token, secretKey);
+}
 
 module.exports = {
-  encode,
-  decode
+    encode,
+    decode
 }

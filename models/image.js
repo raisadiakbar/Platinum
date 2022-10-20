@@ -1,25 +1,30 @@
 'use strict';
-const UUID = require('uuid').v4;
+const uuid = require('uuid').v4;
 const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class image extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
+  class Image extends Model {
     static associate(models) {
-      // define association here
     }
   }
-  image.init({
+  Image.init({
     url: DataTypes.STRING,
-    item_id: DataTypes.UUID
+    item_id: DataTypes.UUID,
+    public_id: DataTypes.STRING,
+    asset_id: DataTypes.STRING
   }, {
     sequelize,
-    modelName: 'image',
+    modelName: 'Image',
   });
-  return image;
+
+  Image.addHook('beforeCreate', (image) => {
+    try {
+      image.id = uuid();
+    } catch (err) {
+      throw err;
+    }
+  })
+
+  return Image;
 };

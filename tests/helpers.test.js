@@ -1,7 +1,6 @@
-const fs = require('fs');
+require('dotenv').config();
 const jwt = require('../helpers/jwt');
 const bcrypt = require('../helpers/bcrypt');
-const cloudinary = require('../helpers/cloudinary');
 
 describe('bcrypt.js', () => {
   test('Bcrypt, invalid password as param. Bcrypt should return false.', () => {
@@ -33,25 +32,30 @@ describe('jwt.js', () => {
   test('Decode using invalid secret-key. Should throw Error.', () => {
     expect(() => jwt.decode('dsadabwhebfhb')).toThrow();
   })
-})
 
-describe('cloudinary.js', () => {
-  test("Upload valid file. Shouldn't throw error.", async () => {
-    const imagePath = './files/66052592-ff76-4c50-81dc-606fe08c2a3c.png';
-    const clonePath = './files/clone.png';
+  test('Decode using valid secret-key. Should return decoded object.', () => {
+    expect(() => jwt.decode(process.env.SECRET_KEY)).toBeTruthy();
+  })
 
-    fs.copyFileSync(imagePath, clonePath);
+  test('encode using invalid secret-key. Should throw Error.', () => {
+    expect(() => jwt.encode('dsadabwhebfhb')).toThrow();
+  })
 
-    const res = await cloudinary.upload(imagePath);
-
-    expect(typeof res.public_id).toBe('string');
-    expect(typeof res.url).toBe('string');
-    expect(typeof res.secure_url).toBe('string');
-
-    //  file should be deleted (exist === false) after upload success.
-    expect(fs.existsSync(imagePath)).toBe(false);
-
-    //  check file in cloudinary
-    fs.renameSync(clonePath, imagePath);
+  test('encode using valid secret-key. Should return encoded object.', () => {
+    expect(() => jwt.encode(process.env.SECRET_KEY)).toBeTruthy();
   })
 })
+
+
+describe('node-mailer', () => {
+  test('Send email using invalid email. Should throw Error.', () => {
+    expect(() => sendEmail('invalid-email')).toThrow();
+  });
+
+  test('Send email using valid email. Should return true.', () => {
+    expect(() => sendEmail(process.env.LOGIN_EMAIL)).toBeTruthy();
+  })
+
+})
+
+
