@@ -14,11 +14,10 @@
     "dialect": "postgres"
   },
   "production": {
-    "username": "tmqxusiemyguvj",
-    "password": "b91122865697d971ce33113959125a2d0f40d8dfeb3f214df52eb805a03e7e9a",
-    "database": "dc65n2lhva12v2",
-    "host": "ec2-50-19-255-190.compute-1.amazonaws.com",
-    "port": "5432",
+    "username": "postgres",
+    "password": "Password",
+    "database": "Platinum",
+    "host": "localhost",
     "dialect": "postgres"
   }
 }

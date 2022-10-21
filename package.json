@@ -25,6 +25,7 @@
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.0",
     "pg": "^8.7.3",
+    "psql": "^0.0.1",
     "sequelize": "^6.25.2",
     "socket.io": "^4.5.1",
     "swagger-ui-express": "^4.5.0",
