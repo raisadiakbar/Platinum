@@ -61,6 +61,26 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, {
     }
 }));
 
+app.post('/forgot-password', async (req, res, next) => {
+    try {
+      const html = await ejs.renderFile('./templates/forgot-password.ejs', {});
+  
+      await mail.sendMail({
+        from: process.env.MAIL_EMAIL,
+        to: req.body.email,
+        subject: 'Forgot Password',
+        html: html
+      });
+  
+      return res.status(200).json({
+        status: 200,
+        message: 'Silahkan cek email anda untuk melakukan perubahan password.'
+      })
+    } catch (err) {
+      next(err);
+    }
+  })
+
 app.use('/api/order', routerOrders);
 app.use('/api/item', routerItems);
 app.use('/api/admin', routerAdmin);
