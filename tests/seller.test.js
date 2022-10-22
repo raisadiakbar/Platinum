@@ -59,20 +59,20 @@ describe('Sellers Endpoints', () => {
   //   expect(typeof res.body.message).toBe('undefined');
   // })
 
-  it('POST /api/seller/register without password, response should be 400', async () => {
-  const res = await request(app) 
-        .post('/api/seller/register')
-        .send({
-            name: 'mimin1',
-            email: 'mimin1@gmail.com',
-            role: 1,
-            photo: ''
-        })
-        .set('Accept', 'application/json');
+  // it('POST /api/seller/register without password, response should be 400', async () => {
+  // const res = await request(app) 
+  //       .post('/api/seller/register')
+  //       .send({
+  //           name: 'mimin1',
+  //           email: 'mimin1@gmail.com',
+  //           role: 1,
+  //           photo: ''
+  //       })
+  //       .set('Accept', 'application/json');
 
-    expect(res.status).toBe(400);
-    expect(typeof res.body.message).toMatch('string'); 
-  })
+  //   expect(res.status).toBe(400);
+  //   expect(typeof res.body.message).toMatch('string'); 
+  // })
 
 
   // it('POST /api/seller/login with valid email and pass, response should be 200', async () => {
