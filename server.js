@@ -9,7 +9,7 @@ const routerItems = require('./src/route/Items');
 const routerCustomers = require('./src/route/Customers');
 const routerAdmin = require('./src/route/Admins');
 const routerSellers = require('./src/route/Sellers');
-const errorHandler = require('./middleware/errHandlers');
+const errorHandler = require('./middleware/errHandler');
 
 const app = Express();
 const server = createServer(app);

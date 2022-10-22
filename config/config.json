@@ -1,17 +1,19 @@
 {
   "development": {
-    "username": "postgres",
-    "password": "Password",
-    "database": "Platinum",
-    "host": "localhost",
-    "dialect": "postgres"
+    "username": "tmqxusiemyguvj",
+    "password": "b91122865697d971ce33113959125a2d0f40d8dfeb3f214df52eb805a03e7e9a",
+    "database": "dc65n2lhva12v2",
+    "host": "ec2-50-19-255-190.compute-1.amazonaws.com",
+    "dialect": "postgres",
+    "Port": "5432"
   },
   "test": {
-    "username": "postgres",
-    "password": "Password",
-    "database": "Platinum",
-    "host": "localhost",
-    "dialect": "postgres"
+    "username": "tmqxusiemyguvj",
+    "password": "b91122865697d971ce33113959125a2d0f40d8dfeb3f214df52eb805a03e7e9a",
+    "database": "dc65n2lhva12v2",
+    "host": "ec2-50-19-255-190.compute-1.amazonaws.com",
+    "dialect": "postgres",
+    "Port": "5432"
   },
   "production": {
     "username": "tmqxusiemyguvj",
