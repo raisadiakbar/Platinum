@@ -90,18 +90,18 @@ describe('Sellers Endpoints', () => {
   //     validToken = res.body.token;
   //   })
   
-  it('POST /api/seller/login with invalid password, response should be 400', async () => {
-      const res = await request(app)
-          .post('/api/seller/login')
-          .send({
-              email: 'mimin1@gmail.com',
-              password: "invalid-password"
-          })
-          .set('Accept', 'application/json');
+  // it('POST /api/seller/login with invalid password, response should be 400', async () => {
+  //     const res = await request(app)
+  //         .post('/api/seller/login')
+  //         .send({
+  //             email: 'mimin1@gmail.com',
+  //             password: "invalid-password"
+  //         })
+  //         .set('Accept', 'application/json');
 
-      expect(401);
-      expect(typeof res.body.message).toMatch('undefined');
-  })
+  //     expect(401);
+  //     expect(typeof res.body.message).toMatch('undefined');
+  // })
 
   // it('POST /api/seller/login with invalid email, response should be 400', async () => {
   //     const res = await request(app)
