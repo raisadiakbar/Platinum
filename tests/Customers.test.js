@@ -29,6 +29,7 @@ const testCustomer = {
 const Upload = './files/Untitled Diagram.drawio.png';
 
 describe('Customers Endpoints', () => {
+  
   // it('POST /api/customer/register with valid values, response should be 201', async () => {
   //   const res = await request(app)
   //     .post('/api/customer/register')
@@ -42,66 +43,66 @@ describe('Customers Endpoints', () => {
   //   expect(typeof res.body.message).toMatch('string');
   // })
 
-  // it('POST /api/customer/register without password, response should be 404', async () => {
-  //   const res = await request(app)
-  //     .post('/register')
-  //     .send({ name: 'mimin1', email: 'mimin1@gmail.com' })
-  //     .set('Accept', 'application/x-www-form-urlencoded');
+  it('POST /api/customer/register without password, response should be 404', async () => {
+    const res = await request(app)
+      .post('/register')
+      .send({ name: 'mimin1', email: 'mimin1@gmail.com' })
+      .set('Accept', 'application/x-www-form-urlencoded');
 
-  //   expect(res.status).toBe(404);
-  //   expect(typeof res.body.message).toMatch('undefined');
-  // })
+    expect(res.status).toBe(404);
+    expect(typeof res.body.message).toMatch('undefined');
+  })
 
-  // it('POST /api/customer/register without email, response should be 404', async () => {
-  //   const res = await request(app)
-  //     .post('/register')
-  //     .send({ name: 'mimin1', password: '123456' })
-  //     .set('Accept', 'application/x-www-form-urlencoded');
+  it('POST /api/customer/register without email, response should be 404', async () => {
+    const res = await request(app)
+      .post('/register')
+      .send({ name: 'mimin1', password: '123456' })
+      .set('Accept', 'application/x-www-form-urlencoded');
 
-  //   expect(res.status).toBe(404);
-  //   expect(typeof res.body.message).toMatch('undefined');
-  // })
+    expect(res.status).toBe(404);
+    expect(typeof res.body.message).toMatch('undefined');
+  })
 
-  // it('POST /api/customer/login with valid email and pass, response should be 200', async () => {
-  //   const res = await request(app)
-  //     .post('/api/customer/login')
-  //     .set('Accept', 'application/json')
-  //     .send({
-  //       email: process.env.LOGIN_EMAIL,
-  //       password: process.env.LOGIN_PASSWORD
-  //     });
+  it('POST /api/customer/login with valid email and pass, response should be 200', async () => {
+    const res = await request(app)
+      .post('/api/customer/login')
+      .set('Accept', 'application/json')
+      .send({
+        email: process.env.LOGIN_EMAIL,
+        password: process.env.LOGIN_PASSWORD
+      });
 
-  //   expect(res.status).toBe(200);
-  //   expect(res.body).toHaveProperty('token');
-  //   expect(typeof res.body.token).toMatch('string');
-  //   validToken = res.body.token;
-  // })
+    expect(res.status).toBe(200);
+    expect(res.body).toHaveProperty('token');
+    expect(typeof res.body.token).toMatch('string');
+    validToken = res.body.token;
+  })
 
-  // it('POST /api/customer/login with invalid email, response should be 404', async () => {
-  //   const res = await request(app)
-  //     .post('/api/customer/login')
-  //     .set('Accept', 'application/json')
-  //     .send({
-  //       email: 'invalid-email',
-  //       password: testCustomer.password
-  //     });
+  it('POST /api/customer/login with invalid email, response should be 404', async () => {
+    const res = await request(app)
+      .post('/api/customer/login')
+      .set('Accept', 'application/json')
+      .send({
+        email: 'invalid-email',
+        password: testCustomer.password
+      });
 
-  //   expect(res.status).toBe(401);
-  //   expect(typeof res.body.message).toMatch('undefined');
-  // })
+    expect(res.status).toBe(401);
+    expect(typeof res.body.message).toMatch('undefined');
+  })
 
-  // it('POST /api/customer/login with invalid pass, response should be 404', async () => {
-  //   const res = await request(app)
-  //     .post('/api/customer/login')
-  //     .set('Accept', 'application/json')
-  //     .send({
-  //       email: testCustomer.email,
-  //       password: 'invalid-pass'
-  //     });
+  it('POST /api/customer/login with invalid pass, response should be 404', async () => {
+    const res = await request(app)
+      .post('/api/customer/login')
+      .set('Accept', 'application/json')
+      .send({
+        email: testCustomer.email,
+        password: 'invalid-pass'
+      });
 
-  //   expect(res.status).toBe(401);
-  //   expect(typeof res.body.message).toMatch('undefined');
-  // })
+    expect(res.status).toBe(401);
+    expect(typeof res.body.message).toMatch('undefined');
+  })
 
   it('GET /api/customer/customers with valid token, response should be 200.', async () => {
     const response = await request(app)
