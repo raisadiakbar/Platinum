@@ -1,9 +1,9 @@
-name: learn-deployment
+name: heroku
 
 on:
   push:
     branches:
-      - 'main'
+      - 'master'
   workflow_dispatch:
 jobs:
   testing:
