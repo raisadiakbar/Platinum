@@ -45,7 +45,7 @@ describe('Customers Endpoints', () => {
 
   it('POST /api/customer/register without password, response should be 404', async () => {
     const res = await request(app)
-      .post('/register')
+      .post('/customer/register')
       .send({ name: 'test', email: 'test@gmail.com' })
       .set('Accept', 'application/x-www-form-urlencoded');
 
