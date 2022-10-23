@@ -43,15 +43,15 @@ describe('Customers Endpoints', () => {
   //   expect(typeof res.body.message).toMatch('string');
   // })
 
-  it('POST /api/customer/register without password, response should be 404', async () => {
-    const res = await request(app)
-      .post('/customer/register')
-      .send({ name: 'test', email: 'test@gmail.com' })
-      .set('Accept', 'application/x-www-form-urlencoded');
+  // it('POST /api/customer/register without password, response should be 404', async () => {
+  //   const res = await request(app)
+  //     .post('/customer/register')
+  //     .send({ name: 'test', email: 'test@gmail.com' })
+  //     .set('Accept', 'application/x-www-form-urlencoded');
 
-    expect(res.status).toBe(404);
-    expect(typeof res.body.message).toMatch('undefined');
-  })
+  //   expect(res.status).toBe(404);
+  //   expect(typeof res.body.message).toMatch('undefined');
+  // })
 
   it('POST /api/customer/register without email, response should be 404', async () => {
     const res = await request(app)
