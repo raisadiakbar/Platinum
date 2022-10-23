@@ -9,12 +9,7 @@ const request = require('supertest');
 let validToken = '';
 let invalidToken = 'Invalid-token-for-negative-cases';
 
-const Login = {
-    email: process.env.LOGIN_EMAIL,
-    password: process.env.LOGIN_PASSWORD
-}
-
-const email = 'mimin1@gmail.com';
+const email = 'test@gmail.com';
     afterAll(() => {
         Admins.destroy({
           where: {
@@ -27,26 +22,26 @@ const Upload = './files/Untitled Diagram.drawio.png';
 
     describe('Admin Endpoints', () => {
 
-        // it('POST /api/admin/register with valid values, response should be 201', async () => {
-        //     jest.setTimeout(5000);
-        //     const res = await request(app)
-        //         .post('/api/admin/register')
-        //         .field('name', 'mimin1')
-        //         .field('email', 'mimin1@gmail.com')
-        //         .field('password', '123456')
-        //         .attach('profile', Upload)
-        //         .set('Accept', 'application/json');
+        it('POST /api/admin/register with valid values, response should be 201', async () => {
+            jest.setTimeout(5000);
+            const res = await request(app)
+                .post('/api/admin/register')
+                .field('name', 'mimin1')
+                .field('email', 'test@gmail.com')
+                .field('password', '123456')
+                .attach('profile', Upload)
+                .set('Accept', 'application/json');
 
-        //     expect(res.status).toBe(201);
-        //     expect(typeof res.body.message).toMatch('string');
-        // })
+            expect(res.status).toBe(201);
+            expect(typeof res.body.message).toMatch('string');
+        })
 
         it('POST /api/admin/register with email has been ready, response should be 400', async () => {
             jest.setTimeout(5000)
             const res = await request(app)
                 .post('/api/admin/register')
-                .field('name', 'mimin1')
-                .field('email', 'mimin1@gmail.com')
+                .field('name', 'test')
+                .field('email', 'test@gmail.com')
                 .field('password', '123456')
                 .attach('profile', Upload)
                 .set('Accept', 'application/json');
@@ -60,8 +55,8 @@ const Upload = './files/Untitled Diagram.drawio.png';
             const res = await request(app) 
                 .post('/api/admin/register')
                 .send({
-                    name: 'test01',
-                    email: 'test01@gmail.com',
+                    name: 'test',
+                    email: 'test@gmail.com',
                     role: 1,
                     profile: ''
                 })
@@ -76,8 +71,8 @@ const Upload = './files/Untitled Diagram.drawio.png';
                 .post('/api/admin/login')
                 .set('Accept', 'application/json')
                 .send({
-                    email: process.env.LOGIN_EMAIL,
-                    password: process.env.LOGIN_PASSWORD
+                    email: 'test@gmail.com',
+                    password: 'password'
                 })
 
             .expect(200);
@@ -104,7 +99,7 @@ const Upload = './files/Untitled Diagram.drawio.png';
                 .post('/api/admin/login')
                 .send({
                     email: "invalid-email",
-                    password: process.env.LOGIN_PASSWORD
+                    password: 'password'
                 })
                 .set('Accept', 'application/json');
 

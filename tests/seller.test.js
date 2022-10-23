@@ -7,16 +7,15 @@ const Op = db.Sequelize.Op;
 const request = require('supertest');
 
 const testSeller = {
-  name: 'Tester',
-  email: 'test@mail.com',
-  password: 'TestPassword'
+  name: 'test',
+  email: 'test@gmail.com',
+  password: 'Password'
 }
 
 let validToken = '';
 let invalidToken = 'Invalid-token-for-negative-cases';
 
-
-const email = 'mimin1@gmail.com';
+const email = 'test@gmail.com';
 afterAll(() => {
   Sellers.destroy({
     where: {
@@ -30,21 +29,7 @@ const Upload = './files/Untitled Diagram.drawio.png';
 
 
 describe('Sellers Endpoints', () => {
-  
-  // it('POST /api/seller/register with valid values, response should be 201', async () => {
-  //   jest.setTimeout(5000)
-  //   const res = await request(app)
-  //     .post('/api/seller/register')
-  //     .field('name', 'mimin1')
-  //     .field('email', 'mimin1@gmail.com')
-  //     .field('password', '123456')
-  //     .attach('photo', Upload)
-  //     .set('Accept', 'application/x-www-form-urlencoded');
-      
-  //     expect(res.status).toBe(201);
-  //     expect(typeof res.body.message).toMatch('string');
-  // })
-
+ 
   it('POST /api/seller/register with email has been ready, response should be 400', async () => {
     jest.setTimeout(5000)
     const res = await request(app)
@@ -64,9 +49,9 @@ describe('Sellers Endpoints', () => {
   const res = await request(app) 
         .post('/api/seller/register')
         .send({
-            name: 'mimin1',
-            email: 'mimin1@gmail.com',
-            role: 1,
+            name: 'test',
+            email: 'test@gmail.com',
+            role: 2,
             photo: ''
         })
         .set('Accept', 'application/json');
@@ -81,8 +66,8 @@ describe('Sellers Endpoints', () => {
       .post('/api/seller/login')
       .set('Accept', 'application/json')
       .send({
-        email: process.env.LOGIN_EMAIL,
-        password: process.env.LOGIN_PASSWORD
+        email: 'test@gmail.com',
+        password: 'password'
       });
 
       expect(res.status).toBe(200);
@@ -95,7 +80,7 @@ describe('Sellers Endpoints', () => {
       const res = await request(app)
           .post('/api/seller/login')
           .send({
-              email: 'mimin1@gmail.com',
+              email: 'test@gmail.com',
               password: "invalid-password"
           })
           .set('Accept', 'application/json');
@@ -109,7 +94,7 @@ describe('Sellers Endpoints', () => {
           .post('/api/seller/login')
           .send({
               email: "invalid-email",
-              password: '123456'
+              password: testSeller.password
           })
           .set('Accept', 'application/json');
 

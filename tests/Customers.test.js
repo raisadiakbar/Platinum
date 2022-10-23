@@ -7,7 +7,7 @@ const Op = db.Sequelize.Op;
 const request = require('supertest');
 
 
-const email = 'mimin1@gmail.com';
+const email = 'test@gmail.com';
 afterAll(() => {
     Customers.destroy({
       where: {
@@ -20,9 +20,9 @@ let validToken = '';
 let invalidToken = 'Invalid-token-for-negative-cases';
 
 const testCustomer = {
-  name: 'mimin1',
-  email: 'mimin1@gmail.com',
-  password: '123456'
+  name: 'test',
+  email: 'test@gmail.com',
+  password: 'password'
 }
 
 
@@ -30,23 +30,23 @@ const Upload = './files/Untitled Diagram.drawio.png';
 
 describe('Customers Endpoints', () => {
   
-  // it('POST /api/customer/register with valid values, response should be 201', async () => {
-  //   const res = await request(app)
-  //     .post('/api/customer/register')
-  //     .field('name', 'mimin1')
-  //     .field('email', 'mimin1@gmail.com')
-  //     .field('password', '123456')
-  //     .attach('photo', Upload)
-  //     .set('Accept', 'application/x-www-form-urlencoded');
+  it('POST /api/customer/register with valid values, response should be 201', async () => {
+    const res = await request(app)
+      .post('/api/customer/register')
+      .field('name', 'test')
+      .field('email', 'mimin1@gmatest@gmail.comil.com')
+      .field('password', 'password')
+      .attach('photo', Upload)
+      .set('Accept', 'application/x-www-form-urlencoded');
 
-  //   expect(res.status).toBe(201);
-  //   expect(typeof res.body.message).toMatch('string');
-  // })
+    expect(res.status).toBe(201);
+    expect(typeof res.body.message).toMatch('string');
+  })
 
   it('POST /api/customer/register without password, response should be 404', async () => {
     const res = await request(app)
       .post('/register')
-      .send({ name: 'mimin1', email: 'mimin1@gmail.com' })
+      .send({ name: 'test', email: 'test@gmail.com' })
       .set('Accept', 'application/x-www-form-urlencoded');
 
     expect(res.status).toBe(404);
@@ -56,7 +56,7 @@ describe('Customers Endpoints', () => {
   it('POST /api/customer/register without email, response should be 404', async () => {
     const res = await request(app)
       .post('/register')
-      .send({ name: 'mimin1', password: '123456' })
+      .send({ name: 'test', password: 'password' })
       .set('Accept', 'application/x-www-form-urlencoded');
 
     expect(res.status).toBe(404);
@@ -68,8 +68,8 @@ describe('Customers Endpoints', () => {
       .post('/api/customer/login')
       .set('Accept', 'application/json')
       .send({
-        email: process.env.LOGIN_EMAIL,
-        password: process.env.LOGIN_PASSWORD
+        email: 'test@gmail.com',
+        password: 'password'
       });
 
     expect(res.status).toBe(200);
