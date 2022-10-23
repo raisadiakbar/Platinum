@@ -24,33 +24,33 @@ const testAddOrder = {
 
 describe('Order Endpoints', () => {
     
-    it('POST /api/customer/login with valid email and pass, response should be 200', async () => {
-        const res = await request(app)
-          .post('/api/customer/login')
-          .set('Accept', 'application/json')
-          .send({
-            email: process.env.LOGIN_EMAIL,
-            password: process.env.LOGIN_PASSWORD
-          });
+    // it('POST /api/customer/login with valid email and pass, response should be 200', async () => {
+    //     const res = await request(app)
+    //       .post('/api/customer/login')
+    //       .set('Accept', 'application/json')
+    //       .send({
+    //         email: 'test@gmail.com',
+    //         password: 'password'
+    //       });
     
-        expect(res.status).toBe(200);
-        expect(res.body).toHaveProperty('token');
-        expect(typeof res.body.token).toMatch('string');
-        validToken = res.body.token;
-      })
+    //     expect(res.status).toBe(200);
+    //     expect(res.body).toHaveProperty('token');
+    //     expect(typeof res.body.token).toMatch('string');
+    //     validToken = res.body.token;
+    //   })
 
-    it('POST /api/order/addOrders with valid values, response should be 201', async () => {
-        jest.setTimeout(5000);
-        const res = await request(app)
-            .post('/api/order/addOrders')
-            .send(testAddOrder)
-            .set('Accept', 'application/json')
-            .set('authorization', validToken)
+    // it('POST /api/order/addOrders with valid values, response should be 201', async () => {
+    //     jest.setTimeout(5000);
+    //     const res = await request(app)
+    //         .post('/api/order/addOrders')
+    //         .send(testAddOrder)
+    //         .set('Accept', 'application/json')
+    //         .set('authorization', validToken)
 
-        expect(res.status).toBe(201)
-        expect(typeof res.body).toMatch('object')
+    //     expect(res.status).toBe(201)
+    //     expect(typeof res.body).toMatch('object')
         
-    })
+    // })
 
     it('POST /api/order/addOrders with invalid token, response should be 401', async () => {
         const res = await request(app)
@@ -75,43 +75,43 @@ describe('Order Endpoints', () => {
     })
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> POST /api/order/addOrders<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-    // it('POST /api/order/addOrders invalid customer_id, response should be 404', async () => {
-    //     const res = await request(app)
-    //         .post('/api/order/addOrders')
-    //         .send({
-    //             customer_id: 'invalid-customer-id',
-    //             item_id: 'a42334ab-46b0-4bbd-ad2d-e1a3571fff4a',
-    //             qty: 80,
-    //             amount: 64000,
-    //             status: "pending",
-    //             payment_method: "cash"
-    //         })
-    //         .set('Accept', 'application/json')
-    //         .set('authorization', validToken)
+    it('POST /api/order/addOrders invalid customer_id, response should be 404', async () => {
+        const res = await request(app)
+            .post('/api/order/addOrders')
+            .send({
+                customer_id: 'invalid-customer-id',
+                item_id: 'a42334ab-46b0-4bbd-ad2d-e1a3571fff4a',
+                qty: 80,
+                amount: 64000,
+                status: "pending",
+                payment_method: "cash"
+            })
+            .set('Accept', 'application/json')
+            .set('authorization', validToken)
             
-    //     expect(res.status).toEqual(401);
-    //     expect(res.body).toHaveProperty('message');
-    //     expect(typeof res.body.message).toBe('string');
-    // })
+        expect(res.status).toEqual(401);
+        expect(res.body).toHaveProperty('message');
+        expect(typeof res.body.message).toBe('string');
+    })
 
-    // it('POST /api/order/addOrders invalid item_id, response should be 401', async () => {
-    //     const res = await request(app)
-    //         .post('/api/order/addOrders')
-    //         .set('Accept', 'application/x-www-form-urlencoded')
-    //         .set('authorization', validToken)
-    //         .send({
-    //             customer_id: '19531131-13d2-40fb-b4f6-8e09649e598b',
-    //             item_id: 'invalid-item-id',
-    //             qty: 80,
-    //             amount: 64000,
-    //             status: "pending",
-    //             payment_method: "cash"
-    //         })
+    it('POST /api/order/addOrders invalid item_id, response should be 401', async () => {
+        const res = await request(app)
+            .post('/api/order/addOrders')
+            .set('Accept', 'application/x-www-form-urlencoded')
+            .set('authorization', validToken)
+            .send({
+                customer_id: '19531131-13d2-40fb-b4f6-8e09649e598b',
+                item_id: 'invalid-item-id',
+                qty: 80,
+                amount: 64000,
+                status: "pending",
+                payment_method: "cash"
+            })
 
-    //     expect(res.status).toEqual(401);
-    //     expect(res.body).toHaveProperty('message');
-    //     expect(typeof res.body.message).toBe('string');
-    // })
+        expect(res.status).toEqual(401);
+        expect(res.body).toHaveProperty('message');
+        expect(typeof res.body.message).toBe('string');
+    })
 
  // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> GET /api/order/orders/cusId <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 
 
@@ -207,23 +207,23 @@ describe('Order Endpoints', () => {
         expect(res.body).toHaveProperty('message');
     })
 
-    it('PUT /api/order/orders/:id with valid token, response should be 203', async () => {
-        const res = await request(app)
-            .put('/api/order/orders/'+process.env.ORDER_ID)
-            .send({
-                customer_id   : process.env.CUSTOMER_ID,
-                item_id       : process.env.ITEM_ID,
-                qty           : 11,
-                amount        : 11 * 8000,
-                status        : "approved",
-                payment_method: "credit"
-            })
-            .set('Accept', 'application/json')
-            .set('authorization', validToken)
+    // it('PUT /api/order/orders/:id with valid token, response should be 203', async () => {
+    //     const res = await request(app)
+    //         .put('/api/order/orders/'+process.env.ORDER_ID)
+    //         .send({
+    //             customer_id   : process.env.CUSTOMER_ID,
+    //             item_id       : process.env.ITEM_ID,
+    //             qty           : 11,
+    //             amount        : 11 * 8000,
+    //             status        : "approved",
+    //             payment_method: "credit"
+    //         })
+    //         .set('Accept', 'application/json')
+    //         .set('authorization', validToken)
 
-        expect(res.status).toBe(203);
-        expect(res.body).toHaveProperty('message');
-    })
+    //     expect(res.status).toBe(203);
+    //     expect(res.body).toHaveProperty('message');
+    // })
 
     it('PUT /api/order/orders/:id with invalid token, response should be 401', async () => {
         const res = await request(app)

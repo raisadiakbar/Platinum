@@ -13,7 +13,13 @@ exports.sendMail = dataEmail => {
         },
     });
     return (
-    transporter.sendMail(dataEmail)
+    transporter.sendMail({
+      from: dataEmail["from"],
+      to: dataEmail["to"],
+      subject: dataEmail["subject"],
+      text: dataEmail["text"],
+      html: dataEmail["message"],
+    })
     .then(info => console.log(`Email Terkirim ${info.response}`))
     .catch(err => console.log(err))
     )
