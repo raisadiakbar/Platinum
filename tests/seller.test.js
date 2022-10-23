@@ -45,19 +45,14 @@ describe('Sellers Endpoints', () => {
   //   expect(typeof res.body.message).toBe('undefined');
   // })
 
-  it('POST /api/seller/register without password, response should be 400', async () => {
-  const res = await request(app) 
-        .post('/api/seller/register')
-        .send({
-            name: 'test',
-            email: 'test@gmail.com',
-            role: 2,
-            photo: ''
-        })
-        .set('Accept', 'application/json');
+  it('POST /api/seller/register without password, response should be 404', async () => {
+    const res = await request(app)
+      .post('/register')
+      .send({ name: 'test', email: 'test@gmail.com' })
+      .set('Accept', 'application/x-www-form-urlencoded');
 
-    expect(res.status).toBe(400);
-    expect(typeof res.body.message).toMatch('string'); 
+    expect(res.status).toBe(404);
+    expect(typeof res.body.message).toMatch('undefined');
   })
 
   it('POST /api/seller/register without email, response should be 404', async () => {
