@@ -54,7 +54,6 @@ controller.register = async (req, res, next) => {
                         status: "201",
                         message: 'Register successfully',
                         sendMail: sendMail(dataEmail)
-                 
                     });
                 })
             })
