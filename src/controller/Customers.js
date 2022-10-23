@@ -5,6 +5,7 @@ const Op = db.Sequelize.Op;
 const { upload1 } = require('../../helpers/upload');
 const { validateText, hash } = require('../../helpers/bcrypt');
 const { encode } = require('../../helpers/jwt');
+const { sendMail } = require('../../helpers/nodemailer');
 const controller = {};
 
 
