@@ -24,7 +24,8 @@ module.exports = {
 
   servers: [
     {
-      url: process.env.HOST,
+      // url: process.env.HOST,
+      url: 'https://bingles.herokuapp.com',
       description: 'Swagger Bingle'
     }
   ],
