@@ -36,16 +36,16 @@ describe('Admin Endpoints', () => {
 //   expect(typeof response.body).toMatch('object');
 // })
 
-    it ('GET /api/admin/admins with invalid token, response should be 401', async () => {
-        const res = await request(app)
-            .get('/api/admin/admins')
-            .set('Accept', 'application/json')
-            .set('authorization', invalidToken)
+    // it ('GET /api/admin/admins with invalid token, response should be 401', async () => {
+    //     const res = await request(app)
+    //         .get('/api/admin/admins')
+    //         .set('Accept', 'application/json')
+    //         .set('authorization', invalidToken)
 
-        expect(res.status).toEqual(401);
-        expect(res.body).toHaveProperty('message');
-        expect(typeof res.body.message).toBe('string');
-    })
+    //     expect(res.status).toEqual(401);
+    //     expect(res.body).toHaveProperty('message');
+    //     expect(typeof res.body.message).toBe('string');
+    // })
 
     it('GET /api/admin/admins with without token, response should be 401', async () => {
         const res = await request(app)
