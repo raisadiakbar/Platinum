@@ -11,7 +11,7 @@ const testAdmins = {
     name: 'Tester',
     email: 'test@mail.com',
     password: 'TestPassword',
-    profile: ''
+    profile: 'Diagram.drawio.png'
   };
  afterAll(() => {
         Admins.destroy({
@@ -25,27 +25,25 @@ const Upload = './files/Untitled Diagram.drawio.png';
 
     describe('Admin Endpoints', () => {
 
-      // it('POST /api/admin/register with valid token, response should be 200.', async () => {
-      //   const response = await request(app)
-      //     .post('/api/admin/register')
-      //     .send({
-      //       testAdmins 
-      //     })
-      //     .set('Accept', 'application/json')
-      //     .set('authorization', validToken);
+      it('POST /api/admin/register with valid token, response should be 200.', async () => {
+        const response = await request(app)
+          .post('/api/admin/register')
+          .send({
+            testAdmins 
+          })
+          .set('Accept', 'application/json')
+          .set('authorization', validToken);
     
-      //   expect(200);
-      //   expect(typeof response.body).toMatch('object');
-      // })
+        expect(200);
+        expect(typeof response.body).toMatch('object');
+      })
 
         it('POST /api/admin/register without password, response should be 400', async () => {
             const res = await request(app) 
                 .post('/api/admin/register')
                 .send({
-                    name: 'test01',
-                    email: 'test01@gmail.com',
-                    role: 1,
-                    profile: ''
+                    name: testAdmins.name,
+                    email: testAdmins.email
                 })
                 .set('Accept', 'application/json');
 
@@ -71,8 +69,8 @@ const Upload = './files/Untitled Diagram.drawio.png';
             const res = await request(app)
                 .post('/api/admin/login')
                 .send({
-                    email: 'mimin1@gmail.com',
-                    password: "invalid-password"
+                  email: testAdmins.email,
+                  password: 'belgedes'
                 })
                 .set('Accept', 'application/json');
         
@@ -84,8 +82,8 @@ const Upload = './files/Untitled Diagram.drawio.png';
             const res = await request(app)
                 .post('/api/admin/login')
                 .send({
-                    email: 'invalid@gmail.com',
-                    password: "password"
+                  email: 'belgedes',
+                  password: testAdmins.password
                 })
                 .set('Accept', 'application/json');
         
