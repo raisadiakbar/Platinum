@@ -13,13 +13,13 @@ const testAdmins = {
     password: 'TestPassword',
     profile: 'Diagram.drawio.png'
   };
- afterAll(() => {
-        Admins.destroy({
-          where: {
-            email: testAdmins.email
-          }
-        })
-      });
+//  afterAll(() => {
+//         Admins.destroy({
+//           where: {
+//             email: testAdmins.email
+//           }
+//         })
+//       });
 
 let validToken = '';
 let invalidToken = 'Invalid-token-for-negative-cases';
@@ -93,7 +93,7 @@ describe('Admin Endpoints', () => {
           expect(200);
           expect(typeof response.body).toMatch('object');
         })
-
+      
         it('POST /api/admin/login with invalid password, response should be 401', async () => {
             const res = await request(app)
                 .post('/api/admin/login')

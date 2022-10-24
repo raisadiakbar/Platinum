@@ -73,8 +73,8 @@ describe('Sellers Endpoints', () => {
   const res = await request(app) 
         .post('/api/seller/register')
         .send({
-            name: 'mimin1',
-            email: 'mimin1@gmail.com',
+            name: 'seller',
+            email: 'seller@gmail.com',
             role: 1,
             photo: ''
         })
@@ -83,8 +83,7 @@ describe('Sellers Endpoints', () => {
     expect(res.status).toBe(400);
     expect(typeof res.body.message).toMatch('string'); 
   })
-
-
+  
   it('POST /api/seller/login with valid token, response should be 200.', async () => {
     const response = await request(app)
       .post('/api/seller/login')
