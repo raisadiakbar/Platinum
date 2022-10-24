@@ -24,16 +24,6 @@ let invalidToken = 'Invalid-token-for-negative-cases';
 
   describe('Admin Endpoints', () => {
 
-      it('GET /api/admin/admins with valid token, response should be 200.', async () => {
-        const response = await request(app)
-          .get('/api/admin/admins')
-          .set('Accept', 'application/json')
-          .set('authorization', validToken);
-    
-        expect(200);
-        expect(typeof response.body).toMatch('object');
-      })
-
     it ('GET /api/admin/admins with invalid token, response should be 401', async () => {
         const res = await request(app)
             .get('/api/admin/admins')
