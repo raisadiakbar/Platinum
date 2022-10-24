@@ -24,6 +24,36 @@ let invalidToken = 'Invalid-token-for-negative-cases';
 const Upload = './files/Untitled Diagram.drawio.png';
 
 describe('Customers Endpoints', () => {
+
+  it('GET /api/customer/customers with valid token, response should be 200.', async () => {
+    const response = await request(app)
+      .get('/api/customer/customers')
+      .set('Accept', 'application/json')
+      .set('authorization', validToken);
+
+    expect(200);
+    expect(typeof response.body).toMatch('object');
+  });
+
+  it('GET /api/customer/customers without token, response should be 401.', async () => {
+    const response = await request(app)
+      .get('/api/customer/customers')
+      .set('Accept', 'application/json');
+
+    expect(response.status).toEqual(401);
+    expect(typeof response.body.message).toMatch('string');
+  })
+
+  it('GET /api/customer/customers with invalid token, response should be 401.', async () => {
+    const response = await request(app)
+      .get('/api/customer/customers')
+      .set('authorization', invalidToken)
+      .set('Accept', 'application/json');
+
+    expect(response.status).toEqual(401);
+    expect(response.body).toHaveProperty('message');
+    expect(response.body.message).toBe('Invalid token');
+  })
   
   it('POST /api/customer/register with valid token, response should be 200.', async () => {
     const response = await request(app)
@@ -88,33 +118,4 @@ describe('Customers Endpoints', () => {
     expect(typeof res.body.message).toMatch('undefined');
 })
 
-  it('GET /api/customer/customers with valid token, response should be 200.', async () => {
-    const response = await request(app)
-      .get('/api/customer/customers')
-      .set('Accept', 'application/json')
-      .set('authorization', validToken);
-
-    expect(200);
-    expect(typeof response.body).toMatch('object');
-  })
-
-  it('GET /api/customer/customers without token, response should be 401.', async () => {
-    const response = await request(app)
-      .get('/api/customer/customers')
-      .set('Accept', 'application/json');
-
-    expect(response.status).toEqual(401);
-    expect(typeof response.body.message).toMatch('string');
-  })
-
-  it('GET /api/customer/customers with invalid token, response should be 401.', async () => {
-    const response = await request(app)
-      .get('/api/customer/customers')
-      .set('authorization', invalidToken)
-      .set('Accept', 'application/json');
-
-    expect(response.status).toEqual(401);
-    expect(response.body).toHaveProperty('message');
-    expect(response.body.message).toBe('Invalid token');
-  })
 })

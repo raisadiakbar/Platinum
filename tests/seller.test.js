@@ -27,6 +27,36 @@ const Upload = './files/Untitled Diagram.drawio.png';
 
 describe('Sellers Endpoints', () => {
 
+  it('GET /api/seller/sellers with valid token, response should be 200.', async () => {
+    const response = await request(app)
+      .get('/api/seller/sellers')
+      .set('Accept', 'application/json')
+      .set('authorization', validToken)
+  
+      expect(200);
+      expect(typeof response.body).toMatch('object');
+    })
+  
+  it('GET /api/seller/sellers without token, response should be 401.', async () => {
+    const response = await request(app)
+      .get('/api/seller/sellers')
+      .set('Accept', 'application/json');
+  
+      expect(response.status).toEqual(401);
+      expect(typeof response.body.message).toMatch('string');
+    })
+  
+  it('GET /api/seller/sellers with invalid token, response should be 401.', async () => {
+    const response = await request(app)
+      .get('/api/seller/sellers')
+      .set('authorization', invalidToken)
+      .set('Accept', 'application/json');
+  
+      expect(response.status).toEqual(401);
+      expect(response.body).toHaveProperty('message');
+      expect(response.body.message).toBe('Invalid token');
+    })
+
   it('POST /api/seller/register with valid token, response should be 200.', async () => {
     const response = await request(app)
       .post('/api/seller/register')
@@ -96,35 +126,5 @@ describe('Sellers Endpoints', () => {
     expect(401);
     expect(typeof res.body.message).toMatch('undefined');
 })
-  
 
-  it('GET /api/seller/sellers with valid token, response should be 200.', async () => {
-    const response = await request(app)
-      .get('/api/seller/sellers')
-      .set('Accept', 'application/json')
-      .set('authorization', validToken)
-
-      expect(200);
-      expect(typeof response.body).toMatch('object');
-    })
-
-  it('GET /api/seller/sellers without token, response should be 401.', async () => {
-    const response = await request(app)
-      .get('/api/seller/sellers')
-      .set('Accept', 'application/json');
-
-      expect(response.status).toEqual(401);
-      expect(typeof response.body.message).toMatch('string');
-    })
-
-  it('GET /api/seller/sellers with invalid token, response should be 401.', async () => {
-    const response = await request(app)
-      .get('/api/seller/sellers')
-      .set('authorization', invalidToken)
-      .set('Accept', 'application/json');
-
-      expect(response.status).toEqual(401);
-      expect(response.body).toHaveProperty('message');
-      expect(response.body.message).toBe('Invalid token');
-    })
 })

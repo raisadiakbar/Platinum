@@ -25,6 +25,36 @@ const Upload = './files/Untitled Diagram.drawio.png';
 
     describe('Admin Endpoints', () => {
 
+      it('GET /api/admin/admins with valid token, response should be 200.', async () => {
+        const response = await request(app)
+          .get('/api/admin/admins')
+          .set('Accept', 'application/json')
+          .set('authorization', validToken);
+    
+        expect(200);
+        expect(typeof response.body).toMatch('object');
+      })
+
+    it ('GET /api/admin/admins with invalid token, response should be 401', async () => {
+        const res = await request(app)
+            .get('/api/admin/admins')
+            .set('Accept', 'application/json')
+            .set('authorization', invalidToken)
+
+        expect(res.status).toEqual(401);
+        expect(res.body).toHaveProperty('message');
+        expect(typeof res.body.message).toBe('string');
+    })
+
+    it('GET /api/admin/admins with without token, response should be 401', async () => {
+        const res = await request(app)
+            .get('/api/admin/admins')
+            .set('Accept', 'application/json')
+
+        expect(res.status).toEqual(401);
+        expect(typeof res.body.message).toMatch('string');
+    })
+
       it('POST /api/admin/register with valid token, response should be 200.', async () => {
         const response = await request(app)
           .post('/api/admin/register')
@@ -33,7 +63,6 @@ const Upload = './files/Untitled Diagram.drawio.png';
           })
           .set('Accept', 'application/json')
           .set('authorization', validToken);
-    
         expect(200);
         expect(typeof response.body).toMatch('object');
       })
@@ -46,7 +75,6 @@ const Upload = './files/Untitled Diagram.drawio.png';
                     email: testAdmins.email
                 })
                 .set('Accept', 'application/json');
-
             expect(res.status).toBe(400);
             expect(typeof res.body.message).toMatch('string'); 
         })
@@ -91,35 +119,6 @@ const Upload = './files/Untitled Diagram.drawio.png';
             expect(typeof res.body.message).toMatch('undefined');
         })
 
-        it('GET /api/admin/admins with valid token, response should be 200.', async () => {
-            const response = await request(app)
-              .get('/api/admin/admins')
-              .set('Accept', 'application/json')
-              .set('authorization', validToken);
-        
-            expect(200);
-            expect(typeof response.body).toMatch('object');
-          })
-
-        it ('GET /api/admin/admins with invalid token, response should be 401', async () => {
-            const res = await request(app)
-                .get('/api/admin/admins')
-                .set('Accept', 'application/json')
-                .set('authorization', invalidToken)
-
-            expect(res.status).toEqual(401);
-            expect(res.body).toHaveProperty('message');
-            expect(typeof res.body.message).toBe('string');
-        })
-
-        it('GET /api/admin/admins with without token, response should be 401', async () => {
-            const res = await request(app)
-                .get('/api/admin/admins')
-                .set('Accept', 'application/json')
-
-            expect(res.status).toEqual(401);
-            expect(typeof res.body.message).toMatch('string');
-        })
     })
 
 
