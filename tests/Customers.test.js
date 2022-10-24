@@ -108,7 +108,7 @@ describe('Customers Endpoints', () => {
     const res = await request(app)
         .post('/api/customer/login')
         .send({
-            email: 'mimin1@gmail.com',
+            email: 'cust@gmail.com',
             password: "invalid-password"
         })
         .set('Accept', 'application/json');
