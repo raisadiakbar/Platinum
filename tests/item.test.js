@@ -2,11 +2,9 @@ require('dotenv').config();
 const app = require('../server');
 const db = require('../models');
 const fs = require('fs');
-const Sellers = db.Sellers;
 const Items = db.Items;
 const Op = db.Sequelize.Op;
 const request = require('supertest');
-const { destroy } = require('../helpers/upload');
 
 const testItem = {
   name: 'Test',
@@ -15,7 +13,14 @@ const testItem = {
   category: 'Test',
   brand: 'Test',
   status: 'ACTIVE',
-}
+};
+afterAll(() => {
+  Items.destroy({
+        where: {
+          name: testItem .name
+        }
+      })
+    });
 
 const newItem = {
   name: 'Test2',
@@ -23,8 +28,14 @@ const newItem = {
   store_name: 'Test2',
   category: 'Test2',
   brand: 'Test2',
-}
-
+};
+afterAll(() => {
+  Items.destroy({
+        where: {
+          name: newItem.name
+        }
+      })
+    });
 
 let validToken = '';
 let invalidToken = 'Invalid-token-for-negative-cases';

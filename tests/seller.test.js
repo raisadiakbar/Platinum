@@ -1,9 +1,7 @@
 require('dotenv').config();
 const app = require('../server');
 const db = require('../models');
-const fs = require('fs');
 const Sellers = db.Sellers;
-const Op = db.Sequelize.Op;
 const request = require('supertest');
 
 const testSellers = {
@@ -27,19 +25,18 @@ const Upload = './files/Untitled Diagram.drawio.png';
 
 
 describe('Sellers Endpoints', () => {
-  // it('POST /api/seller/register with valid values, response should be 201', async () => {
-  //   jest.setTimeout(5000)
-  //   const res = await request(app)
-  //     .post('/api/seller/register')
-  //     .field('name', 'mimin1')
-  //     .field('email', 'mimin1@gmail.com')
-  //     .field('password', '123456')
-  //     .attach('photo', Upload)
-  //     .set('Accept', 'application/x-www-form-urlencoded');
-      
-  //     expect(res.status).toBe(201);
-  //     expect(typeof res.body.message).toMatch('string');
-  // })
+  it('POST /api/seller/register with valid token, response should be 200.', async () => {
+    const response = await request(app)
+      .post('/api/seller/register')
+      .send({
+        testSellers
+      })
+      .set('Accept', 'application/json')
+      .set('authorization', validToken);
+
+    expect(200);
+    expect(typeof response.body).toMatch('object');
+  })
 
 
   it('POST /api/seller/register without password, response should be 400', async () => {

@@ -1,9 +1,7 @@
 require('dotenv').config();
 const app = require('../server');
 const db = require('../models');
-const fs = require('fs');
 const Admins = db.Admins;
-const Op = db.Sequelize.Op;
 const request = require('supertest');
 
 let validToken = '';
@@ -26,35 +24,18 @@ const Upload = './files/Untitled Diagram.drawio.png';
 
     describe('Admin Endpoints', () => {
 
-        // it('POST /api/admin/register with valid values, response should be 201', async () => {
-        //     jest.setTimeout(5000);
-        //     const res = await request(app)
-        //         .post('/api/admin/register')
-        //         .field('name', 'mimin1')
-        //         .field('email', 'mimin1@gmail.com')
-        //         .field('password', '123456')
-        //         .attach('profile', Upload)
-        //         .set('Accept', 'application/json');
-
-        //     expect(res.status).toBe(201);
-        //     expect(typeof res.body.message).toMatch('string');
-        // })
-
-        // it('POST /api/admin/register with email has been ready, response should be 400', async () => {
-        //     jest.setTimeout(5000)
-        //     const res = await request(app)
-        //         .post('/api/admin/register')
-        //         .field('name', 'mimin1')
-        //         .field('email', 'mimin1@gmail.com')
-        //         .field('password', '123456')
-        //         .attach('profile', Upload)
-        //         .set('Accept', 'application/json');
-
-        //     expect(res.status).toBe(400);
-        //     expect(res.body).toHaveProperty('error.message');
-        //     expect(typeof res.body.message).toBe('undefined');
-        // })
-
+      it('POST /api/admin/register with valid token, response should be 200.', async () => {
+        const response = await request(app)
+          .post('/api/admin/register')
+          .send({
+            testAdmins 
+          })
+          .set('Accept', 'application/json')
+          .set('authorization', validToken);
+    
+        expect(200);
+        expect(typeof response.body).toMatch('object');
+      })
         it('POST /api/admin/register without password, response should be 400', async () => {
             const res = await request(app) 
                 .post('/api/admin/register')

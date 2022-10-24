@@ -1,9 +1,7 @@
 require('dotenv').config();
 const app = require('../server');
 const db = require('../models');
-const fs = require('fs');
 const Customers = db.Customers;
-const Op = db.Sequelize.Op;
 const request = require('supertest');
 
 
@@ -25,18 +23,19 @@ let invalidToken = 'Invalid-token-for-negative-cases';
 const Upload = './files/Untitled Diagram.drawio.png';
 
 describe('Customers Endpoints', () => {
-  // it('POST /api/customer/register with valid values, response should be 201', async () => {
-  //   const res = await request(app)
-  //     .post('/api/customer/register')
-  //     .field('name', 'mimin1')
-  //     .field('email', 'mimin1@gmail.com')
-  //     .field('password', '123456')
-  //     .attach('photo', Upload)
-  //     .set('Accept', 'application/x-www-form-urlencoded');
+  
+  it('POST /api/customer/register with valid token, response should be 200.', async () => {
+    const response = await request(app)
+      .post('/api/customer/register')
+      .send({
+        testCustomer
+      })
+      .set('Accept', 'application/json')
+      .set('authorization', validToken);
 
-  //   expect(res.status).toBe(201);
-  //   expect(typeof res.body.message).toMatch('string');
-  // })
+    expect(200);
+    expect(typeof response.body).toMatch('object');
+  })
 
   it('POST /api/customer/register without password, response should be 404', async () => {
     const res = await request(app)

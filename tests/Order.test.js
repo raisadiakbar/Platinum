@@ -2,7 +2,6 @@ require('dotenv').config();
 const app = require('../server');
 const db = require('../models');
 const fs = require('fs');
-const Items = db.items;
 const Orders = db.orders;
 const Op = db.Sequelize.Op;
 const request = require('supertest');
