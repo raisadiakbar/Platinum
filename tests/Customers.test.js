@@ -25,18 +25,18 @@ const Upload = './files/Untitled Diagram.drawio.png';
 
 describe('Customers Endpoints', () => {
   
-  it('POST /api/customer/register with valid token, response should be 200.', async () => {
-    const response = await request(app)
-      .post('/api/customer/register')
-      .send({
-        testCustomer
-      })
-      .set('Accept', 'application/json')
-      .set('authorization', validToken);
+  // it('POST /api/customer/register with valid token, response should be 200.', async () => {
+  //   const response = await request(app)
+  //     .post('/api/customer/register')
+  //     .send({
+  //       testCustomer
+  //     })
+  //     .set('Accept', 'application/json')
+  //     .set('authorization', validToken);
 
-    expect(200);
-    expect(typeof response.body).toMatch('object');
-  })
+  //   expect(200);
+  //   expect(typeof response.body).toMatch('object');
+  // })
 
   it('POST /api/customer/register without password, response should be 404', async () => {
     const res = await request(app)

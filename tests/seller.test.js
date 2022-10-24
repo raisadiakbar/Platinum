@@ -26,18 +26,19 @@ const Upload = './files/Untitled Diagram.drawio.png';
 
 
 describe('Sellers Endpoints', () => {
-  it('POST /api/seller/register with valid token, response should be 200.', async () => {
-    const response = await request(app)
-      .post('/api/seller/register')
-      .send({
-        testSellers
-      })
-      .set('Accept', 'application/json')
-      .set('authorization', validToken);
+  
+  // it('POST /api/seller/register with valid token, response should be 200.', async () => {
+  //   const response = await request(app)
+  //     .post('/api/seller/register')
+  //     .send({
+  //       testSellers
+  //     })
+  //     .set('Accept', 'application/json')
+  //     .set('authorization', validToken);
 
-    expect(200);
-    expect(typeof response.body).toMatch('object');
-  })
+  //   expect(200);
+  //   expect(typeof response.body).toMatch('object');
+  // })
 
 
   it('POST /api/seller/register without password, response should be 400', async () => {

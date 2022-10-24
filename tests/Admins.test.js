@@ -25,18 +25,19 @@ const Upload = './files/Untitled Diagram.drawio.png';
 
     describe('Admin Endpoints', () => {
 
-      it('POST /api/admin/register with valid token, response should be 200.', async () => {
-        const response = await request(app)
-          .post('/api/admin/register')
-          .send({
-            testAdmins 
-          })
-          .set('Accept', 'application/json')
-          .set('authorization', validToken);
+      // it('POST /api/admin/register with valid token, response should be 200.', async () => {
+      //   const response = await request(app)
+      //     .post('/api/admin/register')
+      //     .send({
+      //       testAdmins 
+      //     })
+      //     .set('Accept', 'application/json')
+      //     .set('authorization', validToken);
     
-        expect(200);
-        expect(typeof response.body).toMatch('object');
-      })
+      //   expect(200);
+      //   expect(typeof response.body).toMatch('object');
+      // })
+
         it('POST /api/admin/register without password, response should be 400', async () => {
             const res = await request(app) 
                 .post('/api/admin/register')
