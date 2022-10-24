@@ -10,7 +10,8 @@ let invalidToken = 'Invalid-token-for-negative-cases';
 const testAdmins = {
     name: 'Tester',
     email: 'test@mail.com',
-    password: 'TestPassword'
+    password: 'TestPassword',
+    profile: ''
   };
  afterAll(() => {
         Admins.destroy({

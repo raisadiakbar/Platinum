@@ -7,7 +7,8 @@ const request = require('supertest');
 const testSellers = {
   name: 'Tester',
   email: 'test@mail.com',
-  password: 'TestPassword'
+  password: 'TestPassword',
+  photo: ''
 };
 afterAll(() => {
   Sellers.destroy({
