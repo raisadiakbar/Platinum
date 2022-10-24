@@ -13,13 +13,13 @@ const testAdmins = {
     password: 'TestPassword',
     profile: 'Diagram.drawio.png'
   };
-//  afterAll(() => {
-//         Admins.destroy({
-//           where: {
-//             email: testAdmins.email
-//           }
-//         })
-//       });
+ afterAll(() => {
+        Admins.destroy({
+          where: {
+            email: testAdmins.email
+          }
+        })
+      });
 
     describe('Admin Endpoints', () => {
 
