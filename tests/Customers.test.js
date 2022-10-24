@@ -7,24 +7,20 @@ const Op = db.Sequelize.Op;
 const request = require('supertest');
 
 
-const email = 'mimin1@gmail.com';
+const testCustomer = {
+  name: 'Tester',
+  email: 'test@mail.com',
+  password: 'TestPassword'
+};
 afterAll(() => {
-    Customers.destroy({
-      where: {
-        email: email
-      }
-    })
-});
-
+      Customers.destroy({
+        where: {
+          email: testCustomer.email
+        }
+      })
+    });
 let validToken = '';
 let invalidToken = 'Invalid-token-for-negative-cases';
-
-const testCustomer = {
-  name: 'mimin1',
-  email: 'mimin1@gmail.com',
-  password: '123456'
-}
-
 
 const Upload = './files/Untitled Diagram.drawio.png';
 
@@ -55,53 +51,52 @@ describe('Customers Endpoints', () => {
   it('POST /api/customer/register without email, response should be 404', async () => {
     const res = await request(app)
       .post('/register')
-      .send({ name: 'mimin1', password: '123456' })
+      .send({ name: 'cust', password: '123456' })
       .set('Accept', 'application/x-www-form-urlencoded');
 
     expect(res.status).toBe(404);
     expect(typeof res.body.message).toMatch('undefined');
   })
 
-  it('POST /api/customer/login with valid email and pass, response should be 200', async () => {
-    const res = await request(app)
+  it('POST /api/customer/login with valid token, response should be 200.', async () => {
+    const response = await request(app)
       .post('/api/customer/login')
-      .set('Accept', 'application/json')
-      .send({
-        email: process.env.LOGIN_EMAIL,
-        password: process.env.LOGIN_PASSWORD
-      });
-
-    expect(res.status).toBe(200);
-    expect(res.body).toHaveProperty('token');
-    expect(typeof res.body.token).toMatch('string');
-    validToken = res.body.token;
-  })
-
-  it('POST /api/customer/login with invalid email, response should be 404', async () => {
-    const res = await request(app)
-      .post('/api/customer/login')
-      .set('Accept', 'application/json')
-      .send({
-        email: 'invalid-email',
-        password: testCustomer.password
-      });
-
-    expect(res.status).toBe(401);
-    expect(typeof res.body.message).toMatch('undefined');
-  })
-
-  it('POST /api/customer/login with invalid pass, response should be 404', async () => {
-    const res = await request(app)
-      .post('/api/customer/login')
-      .set('Accept', 'application/json')
       .send({
         email: testCustomer.email,
-        password: 'invalid-pass'
-      });
+        password: testCustomer.password
+      })
+      .set('Accept', 'application/json')
+      .set('authorization', validToken);
 
-    expect(res.status).toBe(401);
-    expect(typeof res.body.message).toMatch('undefined');
+    expect(200);
+    expect(typeof response.body).toMatch('object');
   })
+
+  it('POST /api/customer/login with invalid email, response should be 401', async () => {
+    const res = await request(app)
+        .post('/api/customer/login')
+        .send({
+            email: 'invalid@gmail.com',
+            password: "password"
+        })
+        .set('Accept', 'application/json');
+
+    expect(401);
+    expect(typeof res.body.message).toMatch('undefined');
+})
+
+  it('POST /api/customer/login with invalid password, response should be 401', async () => {
+    const res = await request(app)
+        .post('/api/customer/login')
+        .send({
+            email: 'mimin1@gmail.com',
+            password: "invalid-password"
+        })
+        .set('Accept', 'application/json');
+
+    expect(401);
+    expect(typeof res.body.message).toMatch('undefined');
+})
 
   it('GET /api/customer/customers with valid token, response should be 200.', async () => {
     const response = await request(app)

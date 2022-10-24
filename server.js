@@ -76,9 +76,5 @@ if (process.env.NODE_ENV !== 'test') {
       console.log('<<<< SERVER RUNNING ON PORT', process.env.PORT);
     })
   }
-// PORT = 3000;
-// app.listen(PORT, () => {
-//   console.log('<<< server runnin on port', PORT)
-// });
 
 module.exports = app;

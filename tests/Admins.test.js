@@ -9,16 +9,15 @@ const request = require('supertest');
 let validToken = '';
 let invalidToken = 'Invalid-token-for-negative-cases';
 
-const Login = {
-    email: process.env.LOGIN_EMAIL,
-    password: process.env.LOGIN_PASSWORD
-}
-
-const email = 'mimin1@gmail.com';
-    afterAll(() => {
+const testAdmins = {
+    name: 'Tester',
+    email: 'test@mail.com',
+    password: 'TestPassword'
+  };
+ afterAll(() => {
         Admins.destroy({
           where: {
-            email: email
+            email: testAdmins.email
           }
         })
       });
@@ -71,56 +70,55 @@ const Upload = './files/Untitled Diagram.drawio.png';
             expect(typeof res.body.message).toMatch('string'); 
         })
 
-        it('POST /api/admin/login with valid values, response should be 200', async () => {
-            const res = await request(app)
-                .post('/api/admin/login')
-                .set('Accept', 'application/json')
-                .send({
-                    email: process.env.LOGIN_EMAIL,
-                    password: process.env.LOGIN_PASSWORD
-                })
-
-            .expect(200);
-            expect(res.body).toHaveProperty('token');
-            expect(typeof res.body.token).toMatch('string');
-            validToken = res.body.token;
+        it('POST /api/admin/login with valid token, response should be 200.', async () => {
+          const response = await request(app)
+            .post('/api/admin/login')
+            .send({
+              email: testAdmins.email,
+              password: testAdmins.password
+            })
+            .set('Accept', 'application/json')
+            .set('authorization', validToken);
+      
+          expect(200);
+          expect(typeof response.body).toMatch('object');
         })
 
-        it('POST /api/admin/login with invalid password, response should be 400', async () => {
+        it('POST /api/admin/login with invalid password, response should be 401', async () => {
             const res = await request(app)
                 .post('/api/admin/login')
                 .send({
-                    email: process.env.LOGIN_EMAIL,
+                    email: 'mimin1@gmail.com',
                     password: "invalid-password"
                 })
                 .set('Accept', 'application/json');
-
-            expect(res.status).toBe(401);
+        
+            expect(401);
             expect(typeof res.body.message).toMatch('undefined');
         })
 
-        it('POST /api/admin/login with invalid email, response should be 400', async () => {
+        it('POST /api/admin/login with invalid email, response should be 401', async () => {
             const res = await request(app)
                 .post('/api/admin/login')
                 .send({
-                    email: "invalid-email",
-                    password: process.env.LOGIN_PASSWORD
+                    email: 'invalid@gmail.com',
+                    password: "password"
                 })
                 .set('Accept', 'application/json');
-
-            expect(res.status).toBe(401);
+        
+            expect(401);
             expect(typeof res.body.message).toMatch('undefined');
         })
 
-        it ('GET /api/admin/admins with valid token, response should be 200', async () => {
-            const res = await request(app)
-                .get('/api/admin/admins')
-                .set('Accept', 'application/json')
-                .set('authorization', validToken);
-
-            expect(res.status).toEqual(200);
-            expect(typeof res.body).toMatch('object');
-        })
+        it('GET /api/admin/admins with valid token, response should be 200.', async () => {
+            const response = await request(app)
+              .get('/api/admin/admins')
+              .set('Accept', 'application/json')
+              .set('authorization', validToken);
+        
+            expect(200);
+            expect(typeof response.body).toMatch('object');
+          })
 
         it ('GET /api/admin/admins with invalid token, response should be 401', async () => {
             const res = await request(app)
