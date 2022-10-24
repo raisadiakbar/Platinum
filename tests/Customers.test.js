@@ -11,13 +11,13 @@ const testCustomer = {
   password: 'TestPassword',
   photo: 'Diagram.drawio.png'
 };
-afterAll(() => {
-      Customers.destroy({
-        where: {
-          email: testCustomer.email
-        }
-      })
-    });
+// afterAll(() => {
+//       Customers.destroy({
+//         where: {
+//           email: testCustomer.email
+//         }
+//       })
+//     });
 
 let validToken = '';
 let invalidToken = 'Invalid-token-for-negative-cases';
