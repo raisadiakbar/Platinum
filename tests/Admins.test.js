@@ -21,8 +21,6 @@ const testAdmins = {
         })
       });
 
-const Upload = './files/Untitled Diagram.drawio.png';
-
     describe('Admin Endpoints', () => {
 
       it('GET /api/admin/admins with valid token, response should be 200.', async () => {
