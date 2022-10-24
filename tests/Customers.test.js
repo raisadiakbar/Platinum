@@ -9,7 +9,7 @@ const testCustomer = {
   name: 'Tester',
   email: 'test@mail.com',
   password: 'TestPassword',
-  photo: ''
+  photo: 'Diagram.drawio.png'
 };
 afterAll(() => {
       Customers.destroy({
@@ -25,37 +25,27 @@ const Upload = './files/Untitled Diagram.drawio.png';
 
 describe('Customers Endpoints', () => {
   
-  // it('POST /api/customer/register with valid token, response should be 200.', async () => {
-  //   const response = await request(app)
-  //     .post('/api/customer/register')
-  //     .send({
-  //       testCustomer
-  //     })
-  //     .set('Accept', 'application/json')
-  //     .set('authorization', validToken);
+  it('POST /api/customer/register with valid token, response should be 200.', async () => {
+    const response = await request(app)
+      .post('/api/customer/register')
+      .send({
+        testCustomer
+      })
+      .set('Accept', 'application/json')
+      .set('authorization', validToken);
 
-  //   expect(200);
-  //   expect(typeof response.body).toMatch('object');
-  // })
-
-  it('POST /api/customer/register without password, response should be 404', async () => {
-    const res = await request(app)
-      .post('/register')
-      .send({ name: 'mimin1', email: 'mimin1@gmail.com' })
-      .set('Accept', 'application/x-www-form-urlencoded');
-
-    expect(res.status).toBe(404);
-    expect(typeof res.body.message).toMatch('undefined');
+    expect(200);
+    expect(typeof response.body).toMatch('object');
   })
 
-  it('POST /api/customer/register without email, response should be 404', async () => {
+  it('POST /api/customer/register without password, response should be 400', async () => {
     const res = await request(app)
-      .post('/register')
-      .send({ name: 'cust', password: '123456' })
+      .post('/api/customer/register')
+      .send({ name: 'cust', email: 'cust@gmail.com' })
       .set('Accept', 'application/x-www-form-urlencoded');
 
-    expect(res.status).toBe(404);
-    expect(typeof res.body.message).toMatch('undefined');
+    expect(res.status).toBe(400);
+    expect(typeof res.body.message).toMatch('string');
   })
 
   it('POST /api/customer/login with valid token, response should be 200.', async () => {
