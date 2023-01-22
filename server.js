@@ -71,10 +71,12 @@ app.use('/api/seller', routerSellers);
 // err handler middleware
 app.use(errorHandler);
 
-if (process.env.NODE_ENV !== 'test') {
-    server.listen(process.env.PORT, () => {
-      console.log('<<<< SERVER RUNNING ON PORT', process.env.PORT);
-    })
+ server.listen(5000, () => {
+      console.log('<<<< SERVER RUNNING ON PORT', 5000);
+// if (process.env.NODE_ENV !== 'test') {
+//     server.listen(process.env.PORT, () => {
+//       console.log('<<<< SERVER RUNNING ON PORT', process.env.PORT);
+//     })
   }
 
 module.exports = app;
