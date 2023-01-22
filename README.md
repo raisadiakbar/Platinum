@@ -1,8 +1,9 @@
 # Platinum
 
-# Backend Restful API
+# Backend Restful API (PORT = 5000)
 
 How to use E-Commerce API :
+
 1. First, register in the Admin, Customer, or Seller column. 
 2. Next, Login with the registered email. 
 3. If successful login, enter the token to authorize each column. 
