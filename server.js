@@ -72,7 +72,7 @@ app.use('/api/seller', routerSellers);
 app.use(errorHandler);
 
  server.listen(5000, () => {
-      console.log('<<<< SERVER RUNNING ON PORT', 5000);
+      console.log('<<<< SERVER RUNNING ON 5000');
 // if (process.env.NODE_ENV !== 'test') {
 //     server.listen(process.env.PORT, () => {
 //       console.log('<<<< SERVER RUNNING ON PORT', process.env.PORT);
