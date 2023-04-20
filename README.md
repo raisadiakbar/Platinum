@@ -1,8 +1,8 @@
 # Platinum
 
-# Backend Restful API (PORT = 5000)
+# Backend Restful API (PORT = 3000)
 
-# <a href='http://localhost:5000/api-docs/#/'>Try with Swagger!</a>
+# <a href='http://localhost:3000/api-docs/#/'>Try with Swagger!</a>
 
 How to use E-Commerce API :
 
